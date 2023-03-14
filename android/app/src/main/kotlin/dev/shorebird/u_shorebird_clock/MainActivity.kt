@@ -1,4 +1,4 @@
-package com.example.u_shorebird_clock
+package dev.shorebird.u_shorebird_clock
 
 import io.flutter.embedding.android.FlutterActivity
 
