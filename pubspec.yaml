@@ -10,10 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_clock_helper:
-    git:
-      url: https://github.com/domesticmouse/flutter_clock
-      path: flutter_clock_helper
 
 dev_dependencies:
   flutter_test:

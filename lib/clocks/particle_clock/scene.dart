@@ -129,7 +129,7 @@ class SceneState extends State<Scene> with SingleTickerProviderStateMixin {
             painter: ClockBgParticlePainter(
               fx: _bgFx,
             ),
-            child: Container(),
+            child: const SizedBox(),
           ),
           BackdropFilter(
             filter: ImageFilter.blur(
