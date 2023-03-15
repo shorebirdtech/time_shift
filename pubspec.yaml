@@ -1,5 +1,5 @@
-name: _shorebird_clock
-description: A new Flutter project.
+name: time_shift
+description: Demo app showing Shorebird updates.
 publish_to: "none"
 
 version: 1.0.0

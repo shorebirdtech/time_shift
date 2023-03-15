@@ -1,6 +1,6 @@
-import 'package:_shorebird_clock/clocks/particle_clock/particle_clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:time_shift/clocks/particle_clock/particle_clock.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
