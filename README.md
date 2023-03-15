@@ -1,4 +1,4 @@
-# Shorebird Clock
+# Time Shift
 
 This repository contains a sample Flutter application using Shorebird's CodePush solution.
 
