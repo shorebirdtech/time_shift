@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.shorebird.u_shorebird_clock">
    <application
-        android:label="Shorebird Clock"
+        android:label="Time Shift"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
