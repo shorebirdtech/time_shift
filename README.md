@@ -16,7 +16,7 @@ been submitted to Google Play App Store, but we will eventually submit it to oth
 ## Design
 
 Purpose is to have something worth code-pushing to.  In this case, we figured it might
-be fun to have an app to which we could code-push a differnet clockface every hour.
+be fun to have an app to which we could code-push a different clockface every hour.
 
 Flutter ran a clock contest a few years back and there are numerous gorgeous examples
 of clocks built with Flutter:
