@@ -11,6 +11,8 @@ App icons generated from icon.png using [App Icon Generator](https://www.appicon
 The purpose of this app is to be a test-balloon for store approvals.  Currently it's only
 been submitted to Google Play App Store, but we will eventually submit it to other stores.
 
+* [Google Play App Store](https://play.google.com/store/apps/details?id=dev.shorebird.u_shorebird_clock)
+
 ## Design
 
 Purpose is to have something worth code-pushing to.  In this case, we figured it might
