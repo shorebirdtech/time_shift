@@ -1,1 +1,6 @@
+# This file is used to configure the Shorebird CLI.
+# Learn more at https://shorebird.dev
+
+# This is the unique identifier for your app.
 app_id: time_shift
+base_url: https://api-dev.shorebird.dev
