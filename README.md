@@ -22,12 +22,12 @@ Flutter ran a clock contest a few years back and there are numerous gorgeous exa
 of clocks built with Flutter:
 https://docs.flutter.dev/clock
 
-Current built only has a single clock in it, but a straightforward expansion would
-be to include multiple clockfaces controlled by a compile-time flag and then
-write a script which builds N-different versions of the app for the N clock faces
-and pushes a new one to Shorebird every hour.
+The current build contains two clocks. It is currently hard coded to show the Particle
+Clock, but a straightforward expansion would be to control which clock face is shown
+with a compile-time flag and then write a script which builds N-different versions of
+the app for the N clock faces and pushes a new one to Shorebird every hour.
 
-Another feature I'd like to add is more prevelent display of the author's name
+Another feature I'd like to add is more prevalent display of the author's name
 and link.  e.g. if you tap the clock it could say "@miickel" in the corner
 and when you click on it it could open the original source in a browser window.
 

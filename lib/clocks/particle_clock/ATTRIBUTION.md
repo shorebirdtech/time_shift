@@ -1,0 +1,1 @@
+This was adapted from https://github.com/miickel/flutter_particle_clock.
