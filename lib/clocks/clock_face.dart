@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:time_shift/clocks/generative_clock/generative_clock.dart';
 import 'package:time_shift/clocks/particle_clock/particle_clock.dart';
 
-enum Clock {
+/// All available clock faces.
+enum ClockFace {
   generative,
   particle,
 }
 
-extension ClockWidget on Clock {
+extension ClockFaceWidget on ClockFace {
+  /// Builds the clock face widget associated with this [ClockFace].
   Widget get widget {
     switch (this) {
-      case Clock.generative:
+      case ClockFace.generative:
         return const GenerativeClock();
-      case Clock.particle:
+      case ClockFace.particle:
         return const ParticleClock();
     }
   }
