@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:time_shift/clocks/particle_clock/particle_clock.dart';
+
+import 'clocks/clocks.dart';
+
+/// Use this argument to choose a clock face. Defaults to particle.
+///
+/// Example:
+/// `shorebird run -- --dart-define clock=generative`
+const clockArgName = 'clock';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+  const clockName = String.fromEnvironment(clockArgName);
+  final clock = Clock.values.firstWhere(
+    (clock) => clock.name == clockName,
+    orElse: () => Clock.particle,
+  );
+
   runApp(
-    const MaterialApp(
-      home: ParticleClock(),
+    MaterialApp(
+      home: clock.widget,
     ),
   );
 }
