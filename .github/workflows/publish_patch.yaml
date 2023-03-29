@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Choose Clock Face
-      - run: |
+        run: |
           # Choose a clock face based on the current hour
           # Even hours = particle
           # Odd hours = generative
@@ -24,5 +24,5 @@ jobs:
           fi
 
       - name: Build Patch
-      - run: shorebird patch -- --dart-define clock_face=$clock_face
+        run: shorebird patch -- --dart-define clock_face=$clock_face
         
