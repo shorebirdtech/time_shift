@@ -16,7 +16,6 @@ jobs:
         # Choose a clock face based on the current hour
         # Even hours = particle
         # Odd hours = generative
-
         current_hour=$(date +%H)
         if [ $(($current_hour % 2)) -eq "0" ]; then
           clock_face=particle
