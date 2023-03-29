@@ -8,14 +8,14 @@ import 'globals.dart';
 /// the maximal x range is -0.5 * aspectRatio to 0.5 * aspectRatio
 /// [velocity]: how does the node move every timestep
 class Node {
-  late Point coordinate;
-  Point velocity = randomizer.point(-0.5, 0.5, -0.5, 0.5);
+  late Point<double> coordinate;
+  Point<double> velocity = randomizer.point(-0.5, 0.5, -0.5, 0.5);
   int quadrant = 0;
   int index = 0;
   bool isStatic;
 
   /// returns a node with randomized values
-  /// if [isStatic] is true, then the node does not move and its coordinate is more more likely to be arround the (0,0)
+  /// if [isStatic] is true, then the node does not move and its coordinate is more more likely to be around the (0,0)
   Node(this.isStatic) {
     if (!isStatic) {
       coordinate =
@@ -23,8 +23,12 @@ class Node {
       // velocity = randomizer.doubleInRange(0.2, 1.0);
       velocity = randomizer.point(-0.5, 0.5, -0.5, 0.5);
     } else {
-      Point randomPoint = randomizer.point(-aspectRatio / 2 + 1.5 / 12.0,
-          aspectRatio / 2 - 1.5 / 12.0, -0.5 + 3.0 / 12.0, 0.5 - 3.0 / 12.0);
+      Point<double> randomPoint = randomizer.point(
+        -aspectRatio / 2 + 1.5 / 12.0,
+        aspectRatio / 2 - 1.5 / 12.0,
+        -0.5 + 3.0 / 12.0,
+        0.5 - 3.0 / 12.0,
+      );
       coordinate = randomPoint;
       //velocity = 0.0;
       velocity = const Point(0, 0);

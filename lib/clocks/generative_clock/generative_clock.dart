@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter_clock_helper/model.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
@@ -14,29 +14,25 @@ import 'globals.dart';
 // An array of all the nodes which are animated
 // The fluidity of the animation is highly dependent on the size of this array
 // change for convenience
-List<Node> nodes = List(2500);
+List<Node?> nodes = List.filled(2500, null);
 
 /// A digital clock.
 ///
 /// You can do better than this!
-class DigitalClock extends StatefulWidget {
-  const DigitalClock(this.model);
-
-  final ClockModel model;
+class GenerativeClock extends StatefulWidget {
+  const GenerativeClock({super.key});
 
   @override
-  _DigitalClockState createState() => _DigitalClockState();
+  State createState() => _GenerativeClockState();
 }
 
-class _DigitalClockState extends State<DigitalClock> {
+class _GenerativeClockState extends State<GenerativeClock> {
   DateTime _dateTime = DateTime.now();
-  Ticker _ticker;
+  late Ticker _ticker;
 
   @override
   void initState() {
     super.initState();
-
-    widget.model.addListener(_updateModel);
 
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
 
@@ -58,25 +54,6 @@ class _DigitalClockState extends State<DigitalClock> {
     _ticker.start();
   }
 
-  @override
-  void didUpdateWidget(DigitalClock oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.model != oldWidget.model) {
-      oldWidget.model.removeListener(_updateModel);
-      widget.model.addListener(_updateModel);
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.model.removeListener(_updateModel);
-    super.dispose();
-  }
-
-  void _updateModel() {
-    setState(() {});
-  }
-
   ///the method invoked by the ticker, which just updates the current time
   void _updateTime(Duration d) {
     setState(() {
@@ -87,7 +64,7 @@ class _DigitalClockState extends State<DigitalClock> {
   @override
   Widget build(BuildContext context) {
     int hour = _dateTime.hour;
-    if (!widget.model.is24HourFormat) {
+    if (!MediaQuery.of(context).alwaysUse24HourFormat) {
       hour %= 12;
     }
     int minute = _dateTime.minute;
@@ -99,9 +76,11 @@ class _DigitalClockState extends State<DigitalClock> {
         _dateTime.second.toDouble() / 60.0;
 
     return Container(
-        color: Colors.black,
-        child: CustomPaint(
-            painter: Painter(hour, minute, percentageOfMinute, inside)));
+      color: Colors.black,
+      child: CustomPaint(
+        painter: Painter(hour, minute, percentageOfMinute, inside),
+      ),
+    );
   }
 }
 
@@ -123,19 +102,28 @@ class QuadrantDescriptor {
   }
 }
 
-// for maintain a QuadrantDescriptor for every quadrant
-List<QuadrantDescriptor> quadrantDescriptors = List(quadrants());
+// Maintain a QuadrantDescriptor for every quadrant
+List<QuadrantDescriptor> quadrantDescriptors = List.filled(
+  quadrants(),
+  QuadrantDescriptor(),
+);
 
 // aspect ratio of the screen is 5/3
 double aspectRatio = 5 / 3;
 
 /// A custom painter, which is used to animate the clockface
 class Painter extends CustomPainter {
-  int _hour, _minute;
+  final int _hour;
+  final int _minute;
   double _percentageOfMinute = 0.0;
-  bool _drawInside;
+  final bool _drawInside;
 
-  Painter(this._hour, this._minute, this._percentageOfMinute, this._drawInside);
+  Painter(
+    this._hour,
+    this._minute,
+    this._percentageOfMinute,
+    this._drawInside,
+  );
 
   /// the paint function is used in a similar way to the main loop of a game:
   /// first the state of the world (in this case mainly the position of the nodes) is simulated
@@ -143,13 +131,15 @@ class Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     /// translate the point [p] from our local coordinate system into that of the canvas
-    Point global(Point p) {
-      return Point(p.x * size.height + size.width / 2,
-          p.y * size.height + size.height / 2);
+    Point<double> global(Point<double> p) {
+      return Point(
+        p.x * size.height + size.width / 2,
+        p.y * size.height + size.height / 2,
+      );
     }
 
     /// translates the point [p] into an equivalent offset
-    Offset offset(Point p) {
+    Offset offset(Point<double> p) {
       return Offset(p.x, p.y);
     }
 
@@ -160,7 +150,7 @@ class Painter extends CustomPainter {
 
     // update the positions of the node, we use the quadrant assoziations to count the amount of nodes in each quadrant
     for (var node in nodes) {
-      node.update();
+      node!.update();
       quadrantDescriptors[node.quadrant].size++;
     }
 
@@ -174,16 +164,20 @@ class Painter extends CustomPainter {
     {
       // This is a list of indexes of the nodes, it is ordered by the quadrant association of the nodes,
       // i.e. first all indexes of nodes in the first quadrant appear, then of the second and so forth
-      List<int> indexs = List(nodes.length);
+      List<int> indexs = List.filled(nodes.length, 0);
 
       // fill out the indexs array, by iterating over nodes, and saving the node at appropriate index according to the quadrantDescriptor
       for (int i = 0; i < nodes.length; i++) {
         var node = nodes[i];
+        if (node == null) {
+          continue;
+        }
+
         var listDescriptor = quadrantDescriptors[node.quadrant];
         int index = listDescriptor.beginningIndex + listDescriptor.filled;
         listDescriptor.filled++;
         indexs[index] = i;
-        nodes[i].index = index;
+        nodes[i]!.index = index;
       }
 
       //sort the nodes array, using the indexs array
@@ -191,7 +185,7 @@ class Painter extends CustomPainter {
         int index = indexs[i];
 
         //swap
-        Node temp = nodes[i];
+        Node temp = nodes[i]!;
         int indexOfSwap = temp.index;
 
         nodes[i] = nodes[index];
@@ -302,10 +296,14 @@ class Painter extends CustomPainter {
     // as is appearent, algorithmn scales quadratically with the numbers of nodes,
     // because of this we have the optimization with the quadrants
     for (var node in nodes) {
+      if (node == null) {
+        continue;
+      }
+
       //do we have to draw things for this node?
       if (node.checkCoordinate(_hour, _minute, _drawInside)) {
-        Point point1 = node.coordinate;
-        Point globalPoint = global(point1);
+        Point<double> point1 = node.coordinate;
+        Point<double> globalPoint = global(point1);
 
         /* debug code: draws the nodes 
         Offset off = Offset(globalPoint.x, globalPoint.y);
@@ -326,13 +324,13 @@ class Painter extends CustomPainter {
               i < quadrantDescriptor.beginningIndex + quadrantDescriptor.size;
               i++) {
             // a node in the surrounding quadrants
-            Node node2 = nodes[i];
-            Point point2 = node2.coordinate;
+            Node node2 = nodes[i]!;
+            Point<double> point2 = node2.coordinate;
             double distance = point1.distanceTo(point2);
 
             //do we have to draw things for this node
             if (node2.checkCoordinate(_hour, _minute, _drawInside)) {
-              Point globalPoint2 = global(point2);
+              Point<double> globalPoint2 = global(point2);
 
               //if the distance between nodes is small enough draw a line between them
               if (distance < maxDistanceBetweenNodes) {

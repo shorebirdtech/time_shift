@@ -67,7 +67,7 @@ class DigitChecker {
   ];
 
   /// is the [point] inside the [digit] stretched over the [rect]
-  bool isIn(int digit, Point point, Rectangle rect) {
+  bool isIn(int digit, Point<double> point, Rectangle rect) {
     if (rect.containsPoint(point)) {
       double x = point.x - rect.topLeft.x;
       double y = point.y - rect.topLeft.y;
@@ -87,7 +87,7 @@ class DigitChecker {
   }
 
   /// is the [point] outside the [digit] stretched over the [rect]
-  bool isOut(int digit, Point point, Rectangle rect) {
+  bool isOut(int digit, Point<double> point, Rectangle rect) {
     return !isIn(digit, point, rect);
   }
 }

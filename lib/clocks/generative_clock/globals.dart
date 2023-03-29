@@ -1,4 +1,4 @@
-import 'package:digital_clock/custom_randomizer.dart';
+import 'custom_randomizer.dart';
 import 'digit_checker.dart';
 
 double aspectRatio = 5 / 3;
