@@ -1,0 +1,29 @@
+name: Publish Patch
+
+# Run 15 minutes after the hour, every hour.
+# We use this instead of the top of the hour to avoid heavy-traffic times on github.
+on:
+  schedule:
+    - cron: '*/15 */1 * * *'
+
+jobs:
+  publish_patch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Choose Clock Face
+      - run: |
+        # Choose a clock face based on the current hour
+        # Even hours = particle
+        # Odd hours = generative
+
+        current_hour=$(date +%H)
+        if [ $(($current_hour % 2)) -eq "0" ]; then
+          clock_face=particle
+        else
+          clock_face=generative
+        fi
+
+      - name: Build Patch
+      - run: shorebird patch -- --dart-define clock_face=$clock_face
+        
