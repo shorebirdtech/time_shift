@@ -13,15 +13,15 @@ jobs:
     steps:
       - name: Choose Clock Face
       - run: |
-        # Choose a clock face based on the current hour
-        # Even hours = particle
-        # Odd hours = generative
-        current_hour=$(date +%H)
-        if [ $(($current_hour % 2)) -eq "0" ]; then
-          clock_face=particle
-        else
-          clock_face=generative
-        fi
+          # Choose a clock face based on the current hour
+          # Even hours = particle
+          # Odd hours = generative
+          current_hour=$(date +%H)
+          if [ $(($current_hour % 2)) -eq "0" ]; then
+            clock_face=particle
+          else
+            clock_face=generative
+          fi
 
       - name: Build Patch
       - run: shorebird patch -- --dart-define clock_face=$clock_face
