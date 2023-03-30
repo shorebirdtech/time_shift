@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Shorebird
-        uses: shorebirdtech/setup-shorebird@b965752a6418b35ab062730a5611b2b5f98920ab
+        uses: shorebirdtech/setup-shorebird@d950431250c82de7a37f2748c63643e23994c48b
 
       - name: Setup Shorebird Credentials
         run: |
