@@ -21,7 +21,7 @@ jobs:
 
       # TODO: move this to setup-shorebird once we've confirmed it works
       - name: Update PATH
-        run: echo "/home/runner/.config/shorebird/bin" >> $"GITHUB_PATH"
+        run: echo "/home/runner/.config/shorebird/bin" >> $GITHUB_PATH
 
       - name: Choose Clock Face
         run: |
