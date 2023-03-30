@@ -10,7 +10,7 @@ on:
 
 env:
   # Note: this is specific to macOS
-  SHOREBIRD_CREDENTIALS_PATH: $HOME/Library/Application\ Support/shorebird
+  SHOREBIRD_CREDENTIALS_PATH: ~/Library/Application\ Support/shorebird
 
 jobs:
   publish_patch:
