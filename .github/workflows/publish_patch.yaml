@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Setup Shorebird Credentials
         run: |
-          echo $SHOREBIRD_CREDENTIALS_PATH
+          echo "HOME is $HOME"
           mkdir -p $SHOREBIRD_CREDENTIALS_PATH
           echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
 
