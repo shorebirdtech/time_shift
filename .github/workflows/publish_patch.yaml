@@ -10,14 +10,14 @@ on:
 
 jobs:
   publish_patch:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
 
       - name: Install Shorebird
-        uses: shorebirdtech/setup-shorebird@d950431250c82de7a37f2748c63643e23994c48b
+        uses: shorebirdtech/setup-shorebird@70b705f05278f4af11ea6456d45b5a75d7e1c9a6
 
       - name: Setup Shorebird Credentials
         run: |
