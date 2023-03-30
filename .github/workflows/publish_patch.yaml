@@ -23,7 +23,9 @@ jobs:
           flutter-version: 3.7.8
 
       - name: Install Shorebird
-        run: curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh
+        run: |
+          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh
+          export PATH=$HOME/.shorebird/bin:$PATH
 
       - name: Choose Clock Face
         run: |
