@@ -19,6 +19,10 @@ jobs:
       - name: Install Shorebird
         uses: shorebirdtech/setup-shorebird@v1
 
+      # TODO: move this to setup-shorebird once we've confirmed it works
+      - name: Update PATH
+        run: export PATH="/home/runner/.config/shorebird/bin:$PATH"
+
       - name: Choose Clock Face
         run: |
           # Choose a clock face based on the current hour
