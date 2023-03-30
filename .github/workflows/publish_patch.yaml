@@ -27,9 +27,7 @@ jobs:
         run: |
           mkdir -p "$SHOREBIRD_CREDENTIALS_PATH"
           echo "writing secrets to ${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
-          # echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
-          echo 'asdfasdf' > "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
-          cat "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
+          echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
           echo "wrote secrets to ${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
 
       - name: Choose Clock Face
