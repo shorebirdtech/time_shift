@@ -16,14 +16,8 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.7.8
-
       - name: Install Shorebird
-        uses: time_shift/shorebird-action@v1
+        uses: shorebirdtech/setup-shorebird@v1
 
       - name: Choose Clock Face
         run: |
