@@ -17,18 +17,18 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Shorebird
+        uses: shorebirdtech/setup-shorebird@70b705f05278f4af11ea6456d45b5a75d7e1c9a6
+
       - name: Setup Shorebird Credentials
         run: |
           mkdir -p "$SHOREBIRD_CREDENTIALS_PATH"
           echo "writing secrets to ${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
           echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
           echo "wrote secrets to json file"
-
-      - name: Git Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Shorebird
-        uses: shorebirdtech/setup-shorebird@70b705f05278f4af11ea6456d45b5a75d7e1c9a6
 
       - name: Choose Clock Face
         run: |
