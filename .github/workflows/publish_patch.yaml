@@ -17,6 +17,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Test XDG_CONFIG_HOME
+        run: echo "XDG_CONFIG_HOME is $XDG_CONFIG_HOME"
+
       - name: Git Checkout
         uses: actions/checkout@v3
 
