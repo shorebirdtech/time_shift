@@ -10,7 +10,7 @@ on:
 
 env:
   # Note: this is specific to macOS
-  SHOREBIRD_CREDENTIALS_PATH: ~/Library/Application Support/shorebird
+  SHOREBIRD_CREDENTIALS_PATH: $HOME/Library/Application Support/shorebird
 
 jobs:
   publish_patch:
@@ -20,7 +20,9 @@ jobs:
       - name: Setup Shorebird Credentials
         run: |
           echo "HOME is $HOME"
+          echo "SHOREBIRD_CREDENTIALS_PATH is $SHOREBIRD_CREDENTIALS_PATH"
           mkdir -p $SHOREBIRD_CREDENTIALS_PATH
+          touch $SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json
           echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
 
       - name: Git Checkout
