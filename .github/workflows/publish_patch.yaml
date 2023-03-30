@@ -9,7 +9,7 @@ on:
   pull_request:
 
 env:
-  # Note: this is specific to macOS
+  # Note: this is specific to macOS - this will be a different value for Linux
   SHOREBIRD_CREDENTIALS_PATH: ~/Library/Application\ Support/shorebird
 
 jobs:
