@@ -21,8 +21,12 @@ jobs:
         run: |
           echo "SHOREBIRD_CREDENTIALS_PATH is $SHOREBIRD_CREDENTIALS_PATH"
           mkdir -p $SHOREBIRD_CREDENTIALS_PATH
+          echo "touching $SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
           touch $SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json
-          echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
+          echo "touched $SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
+          echo "writing secrets to json file"
+          echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > $SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json
+          echo "wrote secrets to json file"
 
       - name: Git Checkout
         uses: actions/checkout@v3
