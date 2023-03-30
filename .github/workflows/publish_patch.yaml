@@ -8,9 +8,17 @@ on:
 
 jobs:
   publish_patch:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Shorebird
+        run: curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh
+
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
       - name: Choose Clock Face
         run: |
           # Choose a clock face based on the current hour
@@ -22,7 +30,10 @@ jobs:
           else
             clock_face=generative
           fi
+          echo $clock_face >> $GITHUB_ENV
 
-      - name: Build Patch
-        run: shorebird patch -- --dart-define clock_face=$clock_face
+      - name: Create Patch
+        run: |
+          echo "Creating patch with ${{ env.clock_face }}"
+          shorebird patch -- --dart-define clock_face=${{ env.clock_face }}
         
