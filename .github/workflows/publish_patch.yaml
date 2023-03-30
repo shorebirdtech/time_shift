@@ -11,14 +11,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.7.8
+          channel: stable
 
       - name: Install Shorebird
         run: curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh
-
-      - name: Git Checkout
-        uses: actions/checkout@v3
 
       - name: Choose Clock Face
         run: |
