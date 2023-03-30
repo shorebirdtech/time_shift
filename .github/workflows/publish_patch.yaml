@@ -4,13 +4,9 @@ name: Publish Patch
 # We use this instead of the top of the hour to avoid heavy-traffic times on github.
 on:
   schedule:
-    - cron: '*/15 */1 * * *'
+    - cron: "*/15 */1 * * *"
   workflow_dispatch:
   pull_request:
-
-env:
-  # Note: this is specific to macOS - this will be a different value for Linux
-  SHOREBIRD_CREDENTIALS_PATH: ~/Library/Application\ Support/shorebird
 
 jobs:
   publish_patch:
@@ -25,6 +21,7 @@ jobs:
 
       - name: Setup Shorebird Credentials
         run: |
+          SHOREBIRD_CREDENTIALS_PATH=$HOME/Library/Application\ Support/shorebird
           mkdir -p "$SHOREBIRD_CREDENTIALS_PATH"
           echo "writing secrets to ${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
           # echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "${SHOREBIRD_CREDENTIALS_PATH}/shorebird-session.json"
@@ -51,4 +48,3 @@ jobs:
         run: |
           echo "Creating patch with ${{ env.clock_face }} clock face"
           shorebird patch -- --dart-define clock_face=${{ env.clock_face }}
-        
