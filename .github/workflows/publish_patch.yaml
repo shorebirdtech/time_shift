@@ -22,7 +22,6 @@ jobs:
 
       - name: Setup Shorebird Credentials
         run: |
-          echo ${{ steps.install-shorebird.outputs.INSTALL_PATH }} >> $GITHUB_PATH
           mkdir -p $XDG_CONFIG_HOME/shorebird
           echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$XDG_CONFIG_HOME/shorebird/shorebird-session.json"
 
