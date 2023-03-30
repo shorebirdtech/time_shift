@@ -8,6 +8,10 @@ on:
   workflow_dispatch:
   pull_request:
 
+env:
+  # Note: this is specific to macOS
+  SHOREBIRD_CREDENTIALS_PATH: $HOME/Library/Application Support/shorebird
+
 jobs:
   publish_patch:
     runs-on: macos-latest
@@ -21,8 +25,8 @@ jobs:
 
       - name: Setup Shorebird Credentials
         run: |
-          mkdir -p $XDG_CONFIG_HOME/shorebird
-          echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$XDG_CONFIG_HOME/shorebird/shorebird-session.json"
+          mkdir -p $SHOREBIRD_CREDENTIALS_PATH
+          echo '${{ secrets.SHOREBIRD_CREDENTIALS }}' > "$SHOREBIRD_CREDENTIALS_PATH/shorebird-session.json"
 
       - name: Choose Clock Face
         run: |
