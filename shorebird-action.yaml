@@ -1,0 +1,7 @@
+name: 'Install Shorebird'
+description: 'Installs shorebird in the runner environment'
+runs:
+  using: "composite"
+  steps:
+    - id: shorebird-action
+      run: curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh

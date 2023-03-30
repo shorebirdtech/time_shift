@@ -23,9 +23,7 @@ jobs:
           flutter-version: 3.7.8
 
       - name: Install Shorebird
-        run: |
-          curl --proto '=https' --tlsv1.2 https://raw.githubusercontent.com/shorebirdtech/install/main/install.sh -sSf | sh
-          export PATH=$HOME/.shorebird/bin:$PATH
+        uses: time_shift/shorebird-action@v1
 
       - name: Choose Clock Face
         run: |
@@ -38,6 +36,7 @@ jobs:
           else
             clock_face=generative
           fi
+          echo "Using clock face $clock_face"
           echo "clock_face=$clock_face" >> $GITHUB_ENV
 
       - name: Create Patch
