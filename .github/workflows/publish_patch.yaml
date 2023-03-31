@@ -19,9 +19,6 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Install Rosetta
-        run: softwareupdate --install-rosetta --agree-to-license
-
       - name: Git Checkout
         uses: actions/checkout@v3
 
