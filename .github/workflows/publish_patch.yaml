@@ -13,6 +13,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Setup Java
+        uses: actions/setup-java@v3
+
       - name: Git Checkout
         uses: actions/checkout@v3
 
