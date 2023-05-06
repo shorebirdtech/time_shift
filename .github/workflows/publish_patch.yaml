@@ -50,6 +50,7 @@ jobs:
           echo "Using clock face $clock_face"
           echo "clock_face=$clock_face" >> $GITHUB_ENV
 
+
       - name: Create Patch
         run: |
           echo "Creating patch with ${{ env.clock_face }} clock face"
