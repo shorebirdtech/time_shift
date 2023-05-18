@@ -8,8 +8,10 @@ environment:
   sdk: ">=2.19.4 <3.0.0"
 
 dependencies:
+  flare_flutter: ^3.0.2
   flutter:
     sdk: flutter
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -19,6 +21,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: PressStart2P
+      fonts:
+        - asset: third_party/PressStart2P-Regular.ttf
+
   assets:
     - assets/palettes.json
+    - assets/dark/
+    - assets/light/
     - shorebird.yaml
