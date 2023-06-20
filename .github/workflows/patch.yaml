@@ -10,7 +10,7 @@ jobs:
       run:
         shell: bash
 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📚 Git Checkout
