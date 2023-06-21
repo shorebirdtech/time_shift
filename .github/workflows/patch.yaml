@@ -1,8 +1,16 @@
 name: Shorebird Patch
 
 on:
-  push:
   workflow_dispatch:
+    inputs:
+      clock_face:
+        description: "Clock face to use"
+        required: true
+        type: choice
+        options:
+          - particle
+          - generative
+        default: "particle"
 
 jobs:
   create_patch:
@@ -25,26 +33,12 @@ jobs:
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v0
 
-      - name: ⌚️ Choose Clock Face
-        run: |
-          # Choose a clock face based on the current hour
-          # Even hours = particle
-          # Odd hours = generative
-          current_hour=$(date +%H)
-          if [ $(($current_hour % 2)) -eq "0" ]; then
-            clock_face=particle
-          else
-            clock_face=generative
-          fi
-          echo "Using clock face $clock_face"
-          echo "clock_face=$clock_face" >> $GITHUB_ENV
-
       - name: 🔐 Setup Keystore
         run: |
           echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/keystore.jks
           echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
 
       - name: ✨ Create Patch
-        run: shorebird patch android --force -- --dart-define clock_face=${{ env.clock_face }}
+        run: shorebird patch android --force -- --dart-define clock_face=${{ inputs.clock_face }}
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
