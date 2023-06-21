@@ -1,0 +1,44 @@
+name: Shorebird Patch
+
+on:
+  workflow_dispatch:
+    inputs:
+      clock_face:
+        description: "Clock face to use"
+        required: true
+        type: choice
+        options:
+          - particle
+          - generative
+        default: "particle"
+
+jobs:
+  create_patch:
+    defaults:
+      run:
+        shell: bash
+
+    runs-on: macos-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: ☕️ Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "11"
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v0
+
+      - name: 🔐 Setup Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/keystore.jks
+          echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
+
+      - name: ✨ Create Patch
+        run: shorebird patch android --force -- --dart-define clock_face=${{ inputs.clock_face }}
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
