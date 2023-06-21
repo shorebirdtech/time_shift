@@ -41,8 +41,8 @@ jobs:
 
       - name: 🔐 Setup Keystore
         run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/keystore.jks
-          echo "${{ secrets.KEY_PROPERTIES }}" | base64 --decode > android/key.properties
+          echo "${{ secrets.KEYSTORE }}" > android/keystore.jks
+          echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
 
       - name: ✨ Create Patch
         run: shorebird patch android --force -- --dart-define clock_face=${{ env.clock_face }}
