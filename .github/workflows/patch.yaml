@@ -16,10 +16,16 @@ jobs:
       - name: 📚 Git Checkout
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v0
 
-      - name: Choose Clock Face
+      - name: ⌚️ Choose Clock Face
         run: |
           # Choose a clock face based on the current hour
           # Even hours = particle
