@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:time_shift/update_button.dart';
 
 import 'clocks/clock_face.dart';
 
@@ -22,7 +23,10 @@ void main() {
 
   runApp(
     MaterialApp(
-      home: clock.widget,
+      home: Scaffold(
+        body: clock.widget,
+        floatingActionButton: const UpdateButton(),
+      ),
     ),
   );
 }
