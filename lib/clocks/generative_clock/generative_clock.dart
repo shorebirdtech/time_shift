@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
-import 'node.dart';
 import 'globals.dart';
+import 'node.dart';
 
 // An array of all the nodes which are animated
 // The fluidity of the animation is highly dependent on the size of this array
@@ -79,6 +79,11 @@ class _GenerativeClockState extends State<GenerativeClock> {
       color: Colors.black,
       child: CustomPaint(
         painter: Painter(hour, minute, percentageOfMinute, inside),
+        // We give the CustomPaint a child, so that it can use the child's size
+        // to determine its own size.  If we don't do this, CustomPaint will
+        // size itself wrong when inside a Scaffold.
+        // https://github.com/flutter/flutter/issues/76230#issuecomment-781119751
+        child: Container(),
       ),
     );
   }
@@ -115,7 +120,7 @@ double aspectRatio = 5 / 3;
 class Painter extends CustomPainter {
   final int _hour;
   final int _minute;
-  double _percentageOfMinute = 0.0;
+  final double _percentageOfMinute;
   final bool _drawInside;
 
   Painter(
