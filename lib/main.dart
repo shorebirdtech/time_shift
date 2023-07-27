@@ -18,7 +18,7 @@ void main() {
   const clockName = String.fromEnvironment(clockFaceArgName);
   final clock = ClockFace.values.firstWhere(
     (clock) => clock.name == clockName,
-    orElse: () => ClockFace.particle,
+    orElse: () => ClockFace.generative,
   );
 
   runApp(
