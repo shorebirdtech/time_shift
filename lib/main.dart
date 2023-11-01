@@ -7,13 +7,13 @@ import 'clocks/clock_face.dart';
 /// provided or if the value provided is unrecognized.
 ///
 /// Example:
-/// `shorebird run -- --dart-define clock_face=generative`
+/// `shorebird run -- --dart-define=clock_face=generative`
 const clockFaceArgName = 'clock_face';
 
 /// Use this argument to show the performance overlay.
 ///
 /// Example:
-/// `shorebird run -- --dart-define show_perf_overlay=true`
+/// `shorebird run -- --dart-define=show_perf_overlay=true`
 const showPerfOverlayArgName = 'show_perf_overlay';
 
 void main() {
