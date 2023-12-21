@@ -238,7 +238,7 @@ class Painter extends CustomPainter {
     //draw half the screen black
     Paint white = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.white70;
+      ..color = Colors.white;
 
     // we compute a four sided polygon, which tints have the screen white (the other half is white)
     // it acts as a clockhand for the seconds
