@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   restart_app: ^1.2.1
-  shorebird_code_push: ^1.0.0
+  shorebird_code_push: ^1.1.3
 
 dev_dependencies:
   flutter_test:

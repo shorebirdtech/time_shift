@@ -1,5 +1,3 @@
-import 'dart:ffi' as ffi;
-
 import 'package:flutter/material.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
@@ -19,26 +17,12 @@ enum UpdateStatus {
 
 class _UpdateButtonState extends State<UpdateButton> {
   UpdateStatus status = UpdateStatus.idle;
-  late bool _haveShorebirdEngine;
   bool _haveUpdate = false;
   final _shorebirdCodePush = ShorebirdCodePush();
 
-  @override
-  void initState() {
-    super.initState();
-    // TODO(eseidel): Remove after this is added to shorebird_code_push:
-    // https://github.com/shorebirdtech/updater/issues/49
-    final ffi.DynamicLibrary library = ffi.DynamicLibrary.process();
-    _haveShorebirdEngine = library.providesSymbol('shorebird_update');
-  }
-
-  Future<bool> _doUpdateCheck() async {
-    if (_haveShorebirdEngine) {
-      // Ask the Shorebird servers if there is a new patch available.
-      return _shorebirdCodePush.isNewPatchAvailableForDownload();
-    } else {
-      return Future.delayed(const Duration(seconds: 2), () => false);
-    }
+  Future<bool> _doUpdateCheck() {
+    // Ask the Shorebird servers if there is a new patch available.
+    return _shorebirdCodePush.isNewPatchAvailableForDownload();
   }
 
   Future<void> _checkForUpdate() async {
