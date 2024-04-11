@@ -2,7 +2,6 @@ import 'dart:ui';
 
 /// Holds a list of colors.
 class Palette {
-
   /// The palette's color members. All unique.
   List<Color>? components;
 
