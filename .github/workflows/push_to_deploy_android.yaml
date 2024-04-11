@@ -1,0 +1,42 @@
+name: Shorebird Push to Deploy Android
+
+on:
+  push:
+    branches:
+      - releases/*
+
+env:
+  SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
+jobs:
+  push_to_deploy_android:
+    defaults:
+      run:
+        shell: bash
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🔐 Setup Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/keystore.jks
+          echo "${{ secrets.KEY_PROPERTIES }}" > android/key.properties
+
+      - name: 🐦 Setup Shorebird
+        uses: shorebirdtech/setup-shorebird@v1
+
+      - name: 🚀 Shorebird Release
+        if: ${{ github.event.created }}
+        uses: shorebirdtech/shorebird-release@v0
+        with:
+          platform: android
+
+      - name: 🚀 Shorebird Patch
+        if: ${{ !github.event.created }}
+        uses: shorebirdtech/shorebird-patch@v0
+        with:
+          platform: android
+
