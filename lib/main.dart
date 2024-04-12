@@ -20,11 +20,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  const clockName = String.fromEnvironment(clockFaceArgName);
-  final clock = ClockFace.values.firstWhere(
-    (clock) => clock.name == clockName,
-    orElse: () => ClockFace.generative,
-  );
+  const clock = ClockFace.particle;
 
   runApp(
     MaterialApp(
